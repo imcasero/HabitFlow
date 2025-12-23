@@ -26,6 +26,18 @@ bun run lint:fix
 
 # Format code
 bun run format
+
+# Run tests in watch mode
+bun run test
+
+# Run tests once
+bun run test -- --run
+
+# Run tests with UI
+bun run test:ui
+
+# Run tests with coverage
+bun run test:coverage
 ```
 
 ## Build System
@@ -42,6 +54,12 @@ bun run format
 - **Entry Point**: src/main.tsx renders src/App.tsx into #root element
 - **React Version**: 19.2.0 with StrictMode enabled
 - **Module System**: ESNext with bundler resolution
+- **Path Aliases**: `@/` resolves to `src/` for cleaner imports
+- **Styling**: Tailwind CSS v4 with PostCSS
+- **Testing**: Vitest with React Testing Library
+  - Test files: `*.test.ts` or `*.test.tsx` in src/
+  - Setup file: src/test/setup.ts
+  - Global test utilities from @testing-library/jest-dom
 - **Linting & Formatting**: Biome with strict rules for React and TypeScript
   - Enforces no `any` types (`noExplicitAny: error`)
   - React hooks validation (`useExhaustiveDependencies`, `useHookAtTopLevel`)
@@ -50,9 +68,21 @@ bun run format
 ## Key Configuration Details
 
 - TypeScript compiler options use `noEmit: true` (Vite handles transpilation)
+- Path aliases configured in both tsconfig.app.json and vite.config.ts
 - Biome configured with 2-space indentation, single quotes, and 100-char line width
 - VCS integration enabled (respects .gitignore)
 - Vite serves static assets from /public/ directory
+- Tailwind CSS uses v4 with `@tailwindcss/postcss` plugin
+- Vitest configured with jsdom environment and React support
+
+## VS Code Setup
+
+The project includes recommended VS Code settings in `.vscode/`:
+- **Biome** extension for linting and formatting
+- **Tailwind CSS IntelliSense** for class name completion
+- **Vitest Explorer** for test runner integration
+- Format on save enabled
+- Auto-organize imports on save
 
 ## Coding Standards
 

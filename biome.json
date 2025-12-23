@@ -38,7 +38,8 @@
       "suspicious": {
         "noExplicitAny": "error",
         "noArrayIndexKey": "warn",
-        "noDoubleEquals": "error"
+        "noDoubleEquals": "error",
+        "noUnknownAtRules": "off"
       }
     }
   },
