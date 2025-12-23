@@ -18,8 +18,14 @@ bun run build
 # Preview production build locally
 bun run preview
 
-# Run linter
+# Lint and format check
 bun run lint
+
+# Lint and auto-fix issues
+bun run lint:fix
+
+# Format code
+bun run format
 ```
 
 ## Build System
@@ -36,13 +42,16 @@ bun run lint
 - **Entry Point**: src/main.tsx renders src/App.tsx into #root element
 - **React Version**: 19.2.0 with StrictMode enabled
 - **Module System**: ESNext with bundler resolution
-- **Linting**: ESLint flat config with React Hooks, React Refresh, and TypeScript rules
+- **Linting & Formatting**: Biome with strict rules for React and TypeScript
+  - Enforces no `any` types (`noExplicitAny: error`)
+  - React hooks validation (`useExhaustiveDependencies`, `useHookAtTopLevel`)
+  - Auto-organizes imports on save
 
 ## Key Configuration Details
 
 - TypeScript compiler options use `noEmit: true` (Vite handles transpilation)
-- ESLint configured for TypeScript files only (**.{ts,tsx})
-- Globals set to browser environment
+- Biome configured with 2-space indentation, single quotes, and 100-char line width
+- VCS integration enabled (respects .gitignore)
 - Vite serves static assets from /public/ directory
 
 ## Coding Standards

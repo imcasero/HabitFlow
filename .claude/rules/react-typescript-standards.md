@@ -1,5 +1,13 @@
 # React + TypeScript Code Standards
 
+## Tooling
+
+This project uses **Biome** for linting and formatting:
+- Run `bun run lint` to check for issues
+- Run `bun run lint:fix` to auto-fix linting issues
+- Run `bun run format` to format code
+- Biome enforces `noExplicitAny`, exhaustive dependencies in hooks, and more
+
 ## TypeScript Standards
 
 ### Type Safety
