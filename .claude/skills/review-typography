@@ -1,0 +1,159 @@
+#!/usr/bin/env bash
+# Typography and Semantic HTML Review Skill
+# Reviews React/TypeScript components for proper typography and semantic HTML usage
+
+set -e
+
+FILE_PATH="$1"
+
+if [ -z "$FILE_PATH" ]; then
+  echo "❌ Error: No file path provided"
+  echo "Usage: /review-typography path/to/Component.tsx"
+  exit 1
+fi
+
+if [ ! -f "$FILE_PATH" ]; then
+  echo "❌ Error: File not found: $FILE_PATH"
+  exit 1
+fi
+
+echo "📝 Reviewing: $FILE_PATH"
+echo ""
+
+ERRORS=0
+WARNINGS=0
+SUGGESTIONS=0
+
+# Check for clickable divs/spans
+echo "🔍 Checking semantic HTML..."
+if grep -n "div onClick\|span onClick" "$FILE_PATH" > /dev/null 2>&1; then
+  echo "❌ ERROR: Clickable div/span elements found (should use button)"
+  grep -n "div onClick\|span onClick" "$FILE_PATH" | while read -r line; do
+    echo "  Line ${line%%:*}: ${line#*:}"
+  done
+  echo "  Fix: Use <button type=\"button\"> instead"
+  echo ""
+  ((ERRORS++))
+fi
+
+# Check for multiple h1 tags
+H1_COUNT=$(grep -c "<h1" "$FILE_PATH" 2>/dev/null || echo "0")
+if [ "$H1_COUNT" -gt 1 ]; then
+  echo "❌ ERROR: Multiple <h1> tags found ($H1_COUNT)"
+  echo "  Only one <h1> should exist per page"
+  echo "  Lines:"
+  grep -n "<h1" "$FILE_PATH"
+  echo ""
+  ((ERRORS++))
+fi
+
+# Check for hardcoded font sizes
+if grep -n "fontSize:" "$FILE_PATH" > /dev/null 2>&1; then
+  echo "❌ ERROR: Hardcoded font sizes found"
+  grep -n "fontSize:" "$FILE_PATH" | head -5
+  echo "  Fix: Use typography classes (text-body, text-display-*, etc.)"
+  echo ""
+  ((ERRORS++))
+fi
+
+# Check for arbitrary Tailwind font sizes
+if grep -n "text-\[" "$FILE_PATH" > /dev/null 2>&1; then
+  echo "⚠️  WARNING: Arbitrary Tailwind values found"
+  grep -n "text-\[" "$FILE_PATH" | head -5
+  echo "  Fix: Use system typography classes"
+  echo ""
+  ((WARNINGS++))
+fi
+
+# Check for display text usage
+if grep -n "text-display-" "$FILE_PATH" > /dev/null 2>&1; then
+  DISPLAY_COUNT=$(grep -c "text-display-" "$FILE_PATH")
+  if [ "$DISPLAY_COUNT" -gt 2 ]; then
+    echo "⚠️  WARNING: Heavy use of display text classes ($DISPLAY_COUNT occurrences)"
+    echo "  Display text should only be used for hero/marketing sections"
+    echo "  Consider using semantic headings instead"
+    echo ""
+    ((WARNINGS++))
+  fi
+fi
+
+# Check for links without href
+if grep -n "<a[^>]*>" "$FILE_PATH" | grep -v "href=" > /dev/null 2>&1; then
+  echo "❌ ERROR: Anchor tags without href attribute"
+  grep -n "<a[^>]*>" "$FILE_PATH" | grep -v "href=" | head -5
+  echo "  Fix: Use <button> for actions, <a href=\"...\"> for navigation"
+  echo ""
+  ((ERRORS++))
+fi
+
+# Check for buttons without type
+if grep -n "<button[^>]*>" "$FILE_PATH" | grep -v "type=" > /dev/null 2>&1; then
+  echo "⚠️  WARNING: Buttons without explicit type attribute"
+  grep -n "<button[^>]*>" "$FILE_PATH" | grep -v "type=" | head -3
+  echo "  Suggestion: Add type=\"button\" or type=\"submit\""
+  echo ""
+  ((WARNINGS++))
+fi
+
+# Check if using lists properly (basic heuristic)
+if grep -n "<li>" "$FILE_PATH" > /dev/null 2>&1; then
+  if ! grep -n "<ul>\|<ol>" "$FILE_PATH" > /dev/null 2>&1; then
+    echo "⚠️  WARNING: List items found without ul/ol wrapper"
+    echo "  Ensure list items are wrapped in <ul> or <ol>"
+    echo ""
+    ((WARNINGS++))
+  fi
+fi
+
+# Suggestions for improvement
+echo "💡 Checking for improvement opportunities..."
+
+# Suggest text-caption for small gray text
+if grep -n "text-sm.*text-gray-\|text-gray-.*text-sm" "$FILE_PATH" > /dev/null 2>&1; then
+  echo "💡 SUGGESTION: Consider using text-caption class"
+  echo "  Found: text-sm with gray colors"
+  echo "  Consider: className=\"text-caption\" (12px, gray, consistent)"
+  echo ""
+  ((SUGGESTIONS++))
+fi
+
+# Suggest text-label for uppercase small text
+if grep -n "uppercase.*text-sm\|text-sm.*uppercase" "$FILE_PATH" > /dev/null 2>&1; then
+  echo "💡 SUGGESTION: Consider using text-label class"
+  echo "  Found: text-sm with uppercase"
+  echo "  Consider: className=\"text-label\" (14px, medium, uppercase, wide tracking)"
+  echo ""
+  ((SUGGESTIONS++))
+fi
+
+# Check for prose content potential
+PARAGRAPH_COUNT=$(grep -c "<p>" "$FILE_PATH" 2>/dev/null || echo "0")
+if [ "$PARAGRAPH_COUNT" -gt 5 ] && ! grep -q "prose" "$FILE_PATH"; then
+  echo "💡 SUGGESTION: Consider using prose class"
+  echo "  Found $PARAGRAPH_COUNT paragraphs without prose wrapper"
+  echo "  For long-form content, wrap in <div className=\"prose\">"
+  echo ""
+  ((SUGGESTIONS++))
+fi
+
+# Summary
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "📊 Summary:"
+echo "  ❌ Errors: $ERRORS"
+echo "  ⚠️  Warnings: $WARNINGS"
+echo "  💡 Suggestions: $SUGGESTIONS"
+echo ""
+
+if [ $ERRORS -eq 0 ] && [ $WARNINGS -eq 0 ]; then
+  echo "✅ No critical issues found!"
+  echo ""
+  echo "📚 For best practices, see:"
+  echo "  - docs/TYPOGRAPHY.md"
+  echo "  - docs/TYPOGRAPHY-REVIEW-GUIDE.md"
+else
+  echo "📚 For detailed guidelines, see:"
+  echo "  - docs/TYPOGRAPHY.md"
+  echo "  - docs/TYPOGRAPHY-REVIEW-GUIDE.md"
+  echo ""
+  exit 1
+fi
