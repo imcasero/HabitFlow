@@ -1,11 +1,19 @@
+import { BrowserRouter, Route, Routes } from 'react-router'
+import { Dashboard } from '@/pages/Dashboard'
+import { Home } from '@/pages/Home'
+import { Login } from '@/pages/Login'
+import { Register } from '@/pages/Register'
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="text-center space-y-4">
-        <h1>HabitFlow</h1>
-        <p className="text-body text-gray-600">Track your habits and achieve your goals</p>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
