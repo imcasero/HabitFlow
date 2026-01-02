@@ -92,3 +92,21 @@ See `.claude/rules/react-typescript-standards.md` for comprehensive React and Ty
 - Hook usage guidelines (especially `useEffect`)
 - Performance best practices
 - Common pitfalls to avoid
+
+### Component Type Preferences
+
+- **Do NOT use explicit return types** for React components (e.g., `JSX.Element`, `React.ReactElement`)
+- Rely on TypeScript's type inference for component return types
+- This avoids unnecessary imports and keeps component signatures clean
+- Example:
+  ```tsx
+  // ✅ Good - no explicit return type
+  export const MyComponent = () => {
+    return <div>Hello</div>
+  }
+
+  // ❌ Bad - unnecessary return type
+  export const MyComponent = (): JSX.Element => {
+    return <div>Hello</div>
+  }
+  ```

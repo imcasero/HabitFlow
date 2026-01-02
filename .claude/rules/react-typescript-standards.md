@@ -12,7 +12,8 @@ This project uses **Biome** for linting and formatting:
 
 ### Type Safety
 - **NEVER use `any` type**. Use `unknown` if the type is truly unknown, then narrow it with type guards
-- Prefer explicit return types for functions and components
+- **DO NOT use explicit return types for React components** - rely on type inference
+- Prefer explicit return types for regular functions (not components)
 - Use strict TypeScript compiler options (already enabled)
 - Leverage type inference where types are obvious
 - Use `const` assertions for literal types
@@ -28,7 +29,9 @@ interface ComponentProps {
   title: string;
   count: number;
 }
-const Component = ({ title, count }: ComponentProps): JSX.Element => { }
+const Component = ({ title, count }: ComponentProps) => {
+  return <div>{title}: {count}</div>
+}
 function process(data: unknown): void {
   if (typeof data === 'string') {
     // Handle string
@@ -52,10 +55,42 @@ interface ButtonProps {
   variant?: 'primary' | 'secondary';
   onClick: () => void;
 }
-const Button = ({ label, variant = 'primary', onClick }: ButtonProps): JSX.Element => (
+const Button = ({ label, variant = 'primary', onClick }: ButtonProps) => (
   <button onClick={onClick}>{label}</button>
 )
 ```
+
+### Component Return Types
+
+**DO NOT use explicit return types for React components.** TypeScript infers component return types automatically.
+
+```tsx
+// ❌ Bad - unnecessary return type annotation
+export const MyComponent = (): JSX.Element => {
+  return <div>Hello</div>
+}
+
+export const AnotherComponent = (): React.ReactElement => {
+  return <div>World</div>
+}
+
+// ✅ Good - no return type, TypeScript infers it
+export const MyComponent = () => {
+  return <div>Hello</div>
+}
+
+export const AnotherComponent = () => {
+  return <div>World</div>
+}
+```
+
+**Why avoid explicit component return types?**
+- Avoids unnecessary imports (no need to import `JSX.Element` or `React.ReactElement`)
+- Keeps component signatures clean and simple
+- TypeScript's inference is accurate and sufficient
+- Follows modern React + TypeScript best practices
+
+**Exception:** Custom hooks and regular functions should still use explicit return types for clarity.
 
 ## React Component Standards
 
@@ -81,7 +116,7 @@ interface UserProfileProps {
   userId: string;
 }
 
-const UserProfile = ({ userId }: UserProfileProps): JSX.Element => {
+const UserProfile = ({ userId }: UserProfileProps) => {
   // 1. State
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
