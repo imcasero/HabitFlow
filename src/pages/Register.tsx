@@ -10,6 +10,7 @@ export const Register = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [needsEmailVerification, setNeedsEmailVerification] = useState(false)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -40,10 +41,14 @@ export const Register = () => {
 
       if (data.user) {
         setSuccess(true)
-        // Redirect to dashboard after 2 seconds
-        setTimeout(() => {
-          navigate('/dashboard')
-        }, 2000)
+
+        if (!data.session) {
+          setNeedsEmailVerification(true)
+        } else {
+          setTimeout(() => {
+            navigate('/dashboard')
+          }, 2000)
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during sign up')
@@ -78,9 +83,37 @@ export const Register = () => {
             </div>
           )}
 
-          {success && (
+          {success && !needsEmailVerification && (
             <div className="mb-6 p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 text-sm">
               Account created successfully! Redirecting to dashboard...
+            </div>
+          )}
+
+          {success && needsEmailVerification && (
+            <div className="mb-6 p-6 rounded-lg bg-blue-500/10 border border-blue-500/20">
+              <div className="flex items-start gap-3">
+                <div className="text-3xl">📧</div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-blue-400 mb-2">
+                    Verify your email address
+                  </h3>
+                  <p className="text-sm text-zinc-300 mb-3">
+                    We've sent a confirmation email to{' '}
+                    <span className="font-medium text-white">{email}</span>
+                  </p>
+                  <p className="text-sm text-zinc-400 mb-4">
+                    Click the link in the email to verify your account and start using HabitFlow.
+                  </p>
+                  <div className="p-3 rounded-lg bg-white/5 border border-white/10">
+                    <p className="text-xs text-zinc-500 mb-2">📌 Next steps:</p>
+                    <ol className="text-xs text-zinc-400 space-y-1 list-decimal list-inside">
+                      <li>Check your inbox (and spam folder)</li>
+                      <li>Click the verification link in the email</li>
+                      <li>Return here and sign in</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
@@ -146,17 +179,33 @@ export const Register = () => {
             </button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-zinc-400">
-              Already have an account?{' '}
+          {!needsEmailVerification && (
+            <div className="mt-6 text-center">
+              <p className="text-sm text-zinc-400">
+                Already have an account?{' '}
+                <Link
+                  to="/login"
+                  className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                >
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          )}
+
+          {needsEmailVerification && (
+            <div className="mt-6 text-center">
               <Link
                 to="/login"
-                className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                className="inline-block px-6 py-3 rounded-lg bg-linear-to-r from-blue-500 to-purple-600 text-white font-semibold hover:opacity-90 transition-all"
               >
-                Sign in
+                Go to Sign In
               </Link>
-            </p>
-          </div>
+              <p className="text-xs text-zinc-500 mt-3">
+                After verifying your email, use this to sign in
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Back to home */}

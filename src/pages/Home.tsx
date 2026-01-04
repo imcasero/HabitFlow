@@ -98,7 +98,7 @@ export const Home = () => {
       </section>
 
       {/* Examples Section */}
-      <section className="py-32 bg-gradient-to-b from-transparent to-zinc-900/50">
+      <section className="py-32 bg-linear-to-b from-transparent to-zinc-900/50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Minimal Habit Examples</h2>
@@ -106,7 +106,7 @@ export const Home = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="group p-8 rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.02] border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1">
+            <div className="group p-8 rounded-2xl bg-linear-to-b from-white/5 to-white/2 border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1">
               <div className="w-14 h-14 rounded-xl bg-linear-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center text-3xl mb-6">
                 💪
               </div>
@@ -116,7 +116,7 @@ export const Home = () => {
               </p>
             </div>
 
-            <div className="group p-8 rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.02] border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1">
+            <div className="group p-8 rounded-2xl bg-linear-to-b from-white/5 to-white/2 border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1">
               <div className="w-14 h-14 rounded-xl bg-linear-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center text-3xl mb-6">
                 📖
               </div>
@@ -126,7 +126,7 @@ export const Home = () => {
               </p>
             </div>
 
-            <div className="group p-8 rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.02] border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1">
+            <div className="group p-8 rounded-2xl bg-linear-to-b from-white/5 to-white/2 border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1">
               <div className="w-14 h-14 rounded-xl bg-linear-to-br from-pink-500/20 to-pink-600/20 flex items-center justify-center text-3xl mb-6">
                 💻
               </div>
@@ -201,7 +201,7 @@ export const Home = () => {
 
       {/* CTA Section */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-purple-500/10 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-b from-blue-500/10 via-purple-500/10 to-transparent" />
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to start small?</h2>
           <p className="text-xl text-zinc-400 mb-12 max-w-2xl mx-auto">
