@@ -7,7 +7,7 @@ export const Home = () => {
       <nav className="border-b border-white/10 backdrop-blur-sm sticky top-0 z-50 bg-zinc-950/80">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600" />
+            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-blue-500 to-purple-600" />
             <span className="text-lg font-semibold">HabitFlow</span>
           </div>
           <Link to="/login" className="text-sm text-zinc-400 hover:text-white transition-colors">
@@ -33,7 +33,7 @@ export const Home = () => {
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8">
             Start small.
             <br />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Build big.
             </span>
           </h1>
@@ -76,7 +76,7 @@ export const Home = () => {
                 Philosophy
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">The Minimal Habit Standard</h2>
-              <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mb-8" />
+              <div className="w-16 h-1 bg-linear-to-r from-blue-500 to-purple-500 mb-8" />
             </div>
 
             <div className="space-y-6">
@@ -107,7 +107,7 @@ export const Home = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="group p-8 rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.02] border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center text-3xl mb-6">
+              <div className="w-14 h-14 rounded-xl bg-linear-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center text-3xl mb-6">
                 💪
               </div>
               <h3 className="text-2xl font-bold mb-3">5 Push-ups</h3>
@@ -117,7 +117,7 @@ export const Home = () => {
             </div>
 
             <div className="group p-8 rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.02] border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center text-3xl mb-6">
+              <div className="w-14 h-14 rounded-xl bg-linear-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center text-3xl mb-6">
                 📖
               </div>
               <h3 className="text-2xl font-bold mb-3">Read 5 Lines</h3>
@@ -127,7 +127,7 @@ export const Home = () => {
             </div>
 
             <div className="group p-8 rounded-2xl bg-gradient-to-b from-white/5 to-white/[0.02] border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500/20 to-pink-600/20 flex items-center justify-center text-3xl mb-6">
+              <div className="w-14 h-14 rounded-xl bg-linear-to-br from-pink-500/20 to-pink-600/20 flex items-center justify-center text-3xl mb-6">
                 💻
               </div>
               <h3 className="text-2xl font-bold mb-3">Code 10 Lines</h3>
@@ -156,7 +156,7 @@ export const Home = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center text-2xl mb-6">
+              <div className="w-12 h-12 rounded-lg bg-linear-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center text-2xl mb-6">
                 📊
               </div>
               <h3 className="text-2xl font-bold mb-3">Track your progress</h3>
@@ -167,7 +167,7 @@ export const Home = () => {
             </div>
 
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center text-2xl mb-6">
+              <div className="w-12 h-12 rounded-lg bg-linear-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center text-2xl mb-6">
                 🔄
               </div>
               <h3 className="text-2xl font-bold mb-3">Flexible frequency</h3>
@@ -177,7 +177,7 @@ export const Home = () => {
             </div>
 
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500/20 to-green-600/20 flex items-center justify-center text-2xl mb-6">
+              <div className="w-12 h-12 rounded-lg bg-linear-to-br from-green-500/20 to-green-600/20 flex items-center justify-center text-2xl mb-6">
                 🆓
               </div>
               <h3 className="text-2xl font-bold mb-3">100% Free</h3>
@@ -187,7 +187,7 @@ export const Home = () => {
             </div>
 
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-500/20 to-pink-600/20 flex items-center justify-center text-2xl mb-6">
+              <div className="w-12 h-12 rounded-lg bg-linear-to-br from-pink-500/20 to-pink-600/20 flex items-center justify-center text-2xl mb-6">
                 ✨
               </div>
               <h3 className="text-2xl font-bold mb-3">Simple & minimal</h3>
@@ -209,7 +209,7 @@ export const Home = () => {
           </p>
           <Link
             to="/register"
-            className="inline-block px-10 py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-bold hover:opacity-90 transition-all text-lg"
+            className="inline-block px-10 py-5 bg-linear-to-r from-blue-500 to-purple-600 text-white rounded-lg font-bold hover:opacity-90 transition-all text-lg"
           >
             Get started for free →
           </Link>
@@ -221,7 +221,7 @@ export const Home = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded bg-gradient-to-br from-blue-500 to-purple-600" />
+              <div className="w-6 h-6 rounded bg-linear-to-br from-blue-500 to-purple-600" />
               <span className="font-semibold">HabitFlow</span>
             </div>
             <p className="text-sm text-zinc-600">&copy; 2026 HabitFlow. Start small. Build big.</p>
